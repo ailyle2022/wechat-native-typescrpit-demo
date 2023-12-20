@@ -1,4 +1,5 @@
-import { test } from "../../service/test"
+import { graphql } from '../../utils/graphql'
+
 
 // pages/test.ts
 Page({
@@ -28,7 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    test("test")
+    this.test()
   },
 
   /**
@@ -64,5 +65,20 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  async test() {
+    let res = await graphql().query({
+      query: `query Permissions {
+        permissions {
+            id
+            name
+            code
+            description
+        }
+    }`
+    })
+    console.log(res)
   }
+
 })
